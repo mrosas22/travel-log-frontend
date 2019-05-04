@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
-
 import { Switch, NavLink, Route } from "react-router-dom";
-
 import axios from "axios";
-
+//Main Components
 import Signup from './components/user-pages/Signup';
 import Login from './components/user-pages/Login';
 import Home from './components/Home';
 import ParkAdd from './components/park-pages/ParkAdd';
 import ParkList from './components/park-pages/ParkList';
-
 import ParkDetails from './components/park-pages/ParkDetails';
-
-
 import NotFound from './components/NotFound';
-
+//Style Components
+import Navbar from './components/Navbar'
 
 
 class App extends Component {
@@ -50,6 +46,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Navbar currentUser={this.state.currentUser}/>
         <header>
          <h1> U.S. National Parks </h1>
          <nav>
