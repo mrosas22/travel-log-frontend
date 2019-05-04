@@ -60,7 +60,7 @@ class ParkAdd extends Component {
                 return <Redirect to='login-page'/>
             }
            if(this.state.isSubmitSuccessful){
-               return <Redirect to='/parks'/>
+               return <Redirect to='/park-list'/>
            }
            return(
                <section>

@@ -11,6 +11,11 @@ import Home from './components/Home';
 import ParkAdd from './components/park-pages/ParkAdd';
 import ParkList from './components/park-pages/ParkList';
 
+import ParkDetails from './components/park-pages/ParkDetails';
+
+
+import NotFound from './components/NotFound';
+
 
 
 class App extends Component {
@@ -86,7 +91,8 @@ class App extends Component {
           }  />
           <Route path="/add-park" render={() => <ParkAdd currentUser={this.state.currentUser}/>}/>
           <Route path="/park-list" component={ParkList}/>
-          
+          <Route path="/park-details/:id" component={ParkDetails} />
+          <Route component={NotFound} />     
         </Switch>
 
         

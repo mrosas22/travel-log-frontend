@@ -1,13 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-
+import { Link } from "react-router-dom";
 import ParkAdd from './ParkAdd';
 
 class ParkList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        // the array stays empty until the response from server doesn't fill it
         parksArray: [],
     };
 
@@ -19,6 +18,18 @@ class ParkList extends React.Component {
             console.log('The response from the server is: ',responseFromAPI )
             this.setState({ parksArray: responseFromAPI.data }) })
   }
+  // handleDelete(id) {
+  //   const { onDelete } = this.props;
+
+  //   return axios.delete(`http://localhost:3001/api/parks/${id}`)
+  //     .then(() => onDelete(id));
+  // }
+
+  // handleEdit(park) {
+  //   const { setEdit } = this.props;
+
+  //   setEdit(park);
+  // }
 
   render() {
     const { parksArray } = this.state;
@@ -37,11 +48,13 @@ class ParkList extends React.Component {
               return (
                 <div className="card my-3">
                   <div className="card-header">
-                    {park.name}
+                    <li key={ park._id }>
+                      <Link to={`/park-details/${park._id}`}> { park.name }</Link>
+                    </li>
                   </div>
                   <div className="card-body">
-                    {park.description}
-                    <img  width="100" src={ park.image } alt={ park.name }/>
+                    <p>{park.description}</p>
+                    <img  width="200" src={ park.imagePark } alt={ park.name }/>
                   </div>
                   
                 </div>
