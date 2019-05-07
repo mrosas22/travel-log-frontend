@@ -17,11 +17,14 @@ class AuthMenu extends Component {
           currentUser: null,
       }
     }
+    componentDidMount(){
+        this.setState({ currentUser: this.props.currentUser });
+    }
     syncCurrentUser(user){
         this.setState({ currentUser: user });
     }
     logout(){
-        console.log('Logging out user: ', this.state.currentUser)
+        // console.log('Logging out user: ', this.state.currentUser)
         axios.delete(
           "http://localhost:3001/api/logout",
           {withCredentials:true}
@@ -30,7 +33,7 @@ class AuthMenu extends Component {
         .catch(err => console.log(err))
       }
     render() {
-        console.log('The current user is: ', this.props.currentUser)
+        console.log('In AuthMenu the current user is: ', this.props.currentUser)
         return (
             <WithState>
             {({ anchorEl, updateAnchorEl }) => {
@@ -51,9 +54,6 @@ class AuthMenu extends Component {
                     Login
                     </Button>
                     <Menu id="render-props-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
-                    <MenuItem onClick={handleClose}>
-                        <NavLink to="/login-page"> Login </NavLink>
-                    </MenuItem>
                     {this.props.currentUser ? (
                             <span>
                                 <MenuItem onClick={handleClose}>
@@ -66,6 +66,9 @@ class AuthMenu extends Component {
                             </span>
                         ):(
                             <span>
+                                <MenuItem onClick={handleClose}>
+                                    <NavLink to="/login-page"> Login </NavLink>
+                                </MenuItem>
                                 <MenuItem onClick={handleClose}>
                                     <NavLink to="/signup-page"> Signup </NavLink>
                                 </MenuItem>

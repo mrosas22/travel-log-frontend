@@ -18,18 +18,6 @@ class ParkList extends React.Component {
             console.log('The response from the server is: ',responseFromAPI )
             this.setState({ parksArray: responseFromAPI.data }) })
   }
-  // handleDelete(id) {
-  //   const { onDelete } = this.props;
-
-  //   return axios.delete(`http://localhost:3001/api/parks/${id}`)
-  //     .then(() => onDelete(id));
-  // }
-
-  // handleEdit(park) {
-  //   const { setEdit } = this.props;
-
-  //   setEdit(park);
-  // }
 
   render() {
     const { parksArray } = this.state;

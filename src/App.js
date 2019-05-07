@@ -32,6 +32,7 @@ class App extends Component {
   }
   syncCurrentUser(user){
     this.setState({ currentUser: user });
+    console.log(this.state);
   }
   logout(){
     axios.delete(
@@ -46,11 +47,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar currentUser={this.state.currentUser}/>
+        <Navbar currentUser={this.state.currentUser} logoutUser={this.state.currentUser} />
         <header>
-         <h1> U.S. National Parks </h1>
          <nav>
-
             <NavLink to="/"> Home </NavLink>
             <NavLink to='/park-list'>Parks</NavLink>
             {this.state.currentUser ? (
@@ -69,12 +68,8 @@ class App extends Component {
 
          </nav>
         </header>
-
-        <Switch>
-          
+        <Switch>  
         <Route exact path="/" component={ Home } />
-
-
          {/*  */}
           <Route path="/signup-page" render={ () => 
             <Signup currentUser={this.state.currentUser} 

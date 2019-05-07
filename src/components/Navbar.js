@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from "axios";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -27,21 +28,24 @@ class Navbar extends Component {
     constructor(props){
       super(props);
       this.state = {
-          currentUser: this.props.currentUser
+          currentUser: null
       }
     }
+
     render() {
-        const { classes } = this.props;
+      console.log('Current user in Navbar ', this.props.currentUser)
+        // const { classes } = this.props;
         return (
-            <div className={classes.root}>
+            <div >
             <AppBar position="static">
-                <Toolbar>
+              <p>Test</p>
+                {/* <Toolbar>
                 <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
                     <MenuIcon />
                 </IconButton>
                 <NavLink to="/" variant="h6" color="white" className={classes.grow}> Home </NavLink>
                 <AuthMenu currentUser={this.props.currentUser}/>
-                </Toolbar>
+                </Toolbar> */}
             </AppBar>
             </div>
         );
@@ -49,10 +53,8 @@ class Navbar extends Component {
 
 }
 
-Navbar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// Navbar.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default withStyles(styles)(Navbar);
-
-
