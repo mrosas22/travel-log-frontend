@@ -17,9 +17,9 @@ class AuthMenu extends Component {
           currentUser: null,
       }
     }
-    componentDidMount(){
-        this.setState({ currentUser: this.props.currentUser });
-    }
+    componentWillReceiveProps(nextProps) {
+        this.setState({...this.state, currentUser: nextProps["currentUser"]});
+      }
     syncCurrentUser(user){
         this.setState({ currentUser: user });
     }

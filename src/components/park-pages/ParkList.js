@@ -2,6 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import ParkAdd from './ParkAdd';
+//Styling Components from MD
+import {
+  Button,
+  Card,
+  CardTitle,
+  CardText,
+  Media,
+  MediaOverlay,
+} from 'react-md';
+// import { Card, CardTitle, CardText, Media, MediaOverlay } from 'react-md';
 
 class ParkList extends React.Component {
   constructor(props) {
@@ -23,32 +33,30 @@ class ParkList extends React.Component {
     const { parksArray } = this.state;
 
     return (
-      <div className="container">
-        <div className="row pt-5">
-          <div className="col-12 col-lg-6 offset-lg-3">
-            <h1 className="text-center">Park</h1>
-          </div>
-          {/* <ParkAdd /> */}
-        </div>
-        <div className="row pt-5">
-          <div className="col-12 col-lg-6 offset-lg-3">
+      <div className="md-grid md-text-container">
+        <h2 className="md-cell md-cell--12">
+          Parks
+        </h2>
+  
+        <div className="md-grid">
             {parksArray.map((park) => {
               return (
-                <div className="card my-3">
-                  <div className="card-header">
-                    <li key={ park._id }>
-                      <Link to={`/park-details/${park._id}`}> { park.name }</Link>
-                    </li>
-                  </div>
-                  <div className="card-body">
-                    <p>{park.description}</p>
-                    <img  width="200" src={ park.imagePark } alt={ park.name }/>
-                  </div>
-                  
-                </div>
+                <Card className="cards__example md-cell md-cell--6 md-cell--8-tablet">
+                  <Media>
+                    <img src={park.imagePark} alt="" />
+                    <MediaOverlay>
+                      <CardTitle title={park.name} >
+                        <Button className="md-cell--right" icon></Button>
+                      </CardTitle>
+                    </MediaOverlay>
+                  </Media>
+                  <CardText>
+                      <p>{park.description}</p>
+                    </CardText>
+                </Card>
               )
             })}
-          </div>
+         
         </div>
       </div>
     );

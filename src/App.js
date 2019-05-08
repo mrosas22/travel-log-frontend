@@ -9,10 +9,28 @@ import Home from './components/Home';
 import ParkAdd from './components/park-pages/ParkAdd';
 import ParkList from './components/park-pages/ParkList';
 import ParkDetails from './components/park-pages/ParkDetails';
+import Activities from './components/Activities';
+import Community from './components/Community';
 import NotFound from './components/NotFound';
 //Style Components
 import Navbar from './components/Navbar'
+import Sidebar from './components/Sidebar';
+import { NavigationDrawer } from 'react-md';
 
+const navItems = [{
+  exact: true,
+  label: 'Home',
+  to: '/',
+}, {
+  label: 'Parks',
+  to: '/park-list',
+}, {
+  label: 'Activities',
+  to: '/activities',
+}, {
+  label: 'Community',
+  to: '/community',
+}];
 
 class App extends Component {
   constructor(){
@@ -68,25 +86,23 @@ class App extends Component {
 
          </nav>
         </header>
-        <Switch>  
-        <Route exact path="/" component={ Home } />
-         {/*  */}
-          <Route path="/signup-page" render={ () => 
-            <Signup currentUser={this.state.currentUser} 
-            onUserChange={ userDoc => this.syncCurrentUser(userDoc) }   />
-          }  />
-
-          
-          <Route path="/login-page" render={ () => 
-            <Login currentUser={ this.state.currentUser } 
-            onUserChange={userDoc => this.syncCurrentUser(userDoc)} />
-          }  />
-          <Route path="/add-park" render={() => <ParkAdd currentUser={this.state.currentUser}/>}/>
-          <Route path="/park-list" component={ParkList}/>
-          <Route path="/park-details/:id" component={ParkDetails} />
-          <Route component={NotFound} />     
-        </Switch>
-
+       
+        <Route
+        render={({ location }) => (
+          <NavigationDrawer
+            drawerTitle="U.S. National Parks"
+            toolbarTitle="Community Travel Guide"
+            navItems={navItems.map(props => <Sidebar {...props} key={props.to} />)}
+          >
+            <Switch key={location.key}>
+              <Route exact path="/" location={location} component={Home} />
+              <Route path="/park-list" location={location} component={ParkList} />
+              <Route path="/activities" location={location} component={Activities} />
+              <Route path="/community" location={location} component={Community} />
+            </Switch>
+          </NavigationDrawer>
+        )}
+      />
         
 
         <footer>

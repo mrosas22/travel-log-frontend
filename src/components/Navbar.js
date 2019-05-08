@@ -34,18 +34,17 @@ class Navbar extends Component {
 
     render() {
       console.log('Current user in Navbar ', this.props.currentUser)
-        // const { classes } = this.props;
+        const { classes } = this.props;
         return (
             <div >
             <AppBar position="static">
-              <p>Test</p>
-                {/* <Toolbar>
+                <Toolbar>
                 <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
                     <MenuIcon />
                 </IconButton>
                 <NavLink to="/" variant="h6" color="white" className={classes.grow}> Home </NavLink>
                 <AuthMenu currentUser={this.props.currentUser}/>
-                </Toolbar> */}
+                </Toolbar>
             </AppBar>
             </div>
         );
@@ -53,8 +52,8 @@ class Navbar extends Component {
 
 }
 
-// Navbar.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
+Navbar.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(Navbar);
