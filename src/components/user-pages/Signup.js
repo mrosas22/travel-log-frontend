@@ -1,5 +1,15 @@
 import React, {Component} from 'react';
 import axios from 'axios'
+import {NavLink, Redirect} from 'react-router-dom'
+//Styling Components from Semantic UI
+import {
+    Button,
+    Form,
+    Grid,
+    Header,
+    Message,
+    Segment,
+  } from 'semantic-ui-react';
 
 class Signup extends Component{
     constructor(props){
@@ -38,47 +48,58 @@ class Signup extends Component{
     render(){
         const {currentUser} = this.props
         if(currentUser){
-            return(
-                <section>
-                    <h2>You already signed up!</h2>
-                    <p>Welcome, {currentUser.fullName}! Your email is: {currentUser.email}</p>
-                </section>
-            )
+            return <Redirect to='/' />
         }
 
         return(
-
-            <section>
-                <h2>Signup</h2>
-                <form onSubmit={event => this.handleSubmit(event)}>
-                    <label>Full Name</label>
-                    <input
-                        value = {this.state.fullName}
-                        onChange ={event => this.genericSync(event)}
-                        type="text"
-                        name="fullName"
-                        placeholder=""
+            <Grid centered columns={2}>
+                <Grid.Column>
+                <Header as="h2" textAlign="center">
+                    Sign Up
+                </Header>
+                <Segment>
+                    <Form size="large" onSubmit={event => this.handleSubmit(event)}>
+                    <Form.Input
+                        value={this.state.fullName}
+                        onChange={event => this.genericSync(event)}
+                        name="fullName" 
+                        fluid
+                        icon="user"
+                        iconPosition="left"
+                        placeholder="Full Name"
                     />
-                    <label>Email</label>
-                    <input
-                        value = {this.state.email}
-                        onChange ={event => this.genericSync(event)}
-                        type="text"
-                        name="email"
-                        placeholder=""
+                    <Form.Input
+                        value={this.state.email}
+                        onChange={event => this.genericSync(event)}
+                        name="email" 
+                        fluid
+                        icon="user"
+                        iconPosition="left"
+                        placeholder="Email address"
                     />
-                    <label>Password</label>
-                    <input
-                        value = {this.state.originalPassword}
-                        onChange ={event => this.genericSync(event)}
+                    <Form.Input
+                        value={this.state.originalPassword}
+                        onChange={event => this.genericSync(event)}
+                        name="originalPassword" 
+                        fluid
+                        icon="lock"
+                        iconPosition="left"
+                        placeholder="Password"
                         type="password"
-                        name="originalPassword"
-                        placeholder="********"
                     />
-                    <button> Sign Up </button>
-                </form>
-                    {this.state.message && <div>{this.state.message}</div>}
-            </section>
+
+                    <Button color="blue" fluid size="large">
+                        Sign Up
+                    </Button>
+                    </Form>
+                </Segment>
+                <Message>
+                    Already Have an account? <NavLink to={"/login-page"}> Login</NavLink>
+                </Message >
+                    { this.state.message && <Message>{ this.state.message } </Message >}
+                </Grid.Column>
+            </Grid>
+           
         )
     }
 }

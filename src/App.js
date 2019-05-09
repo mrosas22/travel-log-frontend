@@ -16,6 +16,7 @@ import NotFound from './components/NotFound';
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar';
 import { NavigationDrawer } from 'react-md';
+import HeaderSection from './components/HeaderSection';
 
 const navItems = [{
   exact: true,
@@ -24,7 +25,7 @@ const navItems = [{
 }, {
   label: 'Parks',
   to: '/park-list',
-}, {
+},{
   label: 'Activities',
   to: '/activities',
 }, {
@@ -66,6 +67,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar currentUser={this.state.currentUser} logoutUser={this.state.currentUser} />
+        <HeaderSection/>
         <header>
          <nav>
             <NavLink to="/"> Home </NavLink>
@@ -86,7 +88,6 @@ class App extends Component {
 
          </nav>
         </header>
-       
         <Route
         render={({ location }) => (
           <NavigationDrawer
@@ -96,6 +97,14 @@ class App extends Component {
           >
             <Switch key={location.key}>
               <Route exact path="/" location={location} component={Home} />
+              <Route path="/signup-page" location={location} render={ () => 
+                <Signup currentUser={ this.state.currentUser } 
+                  onUserChange={userDoc => this.syncCurrentUser(userDoc)} />
+                } />
+              <Route path="/login-page" location={location} render={ () => 
+                <Login currentUser={ this.state.currentUser } 
+                  onUserChange={userDoc => this.syncCurrentUser(userDoc)} />
+                } />
               <Route path="/park-list" location={location} component={ParkList} />
               <Route path="/activities" location={location} component={Activities} />
               <Route path="/community" location={location} component={Community} />

@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 import {NavLink, Redirect} from 'react-router-dom'
-import Form from 'react-bootstrap/Form'
+//Styling Components from Semantic UI
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Message,
+  Segment,
+} from 'semantic-ui-react';
 
 class Login extends Component {
     constructor(props) {
@@ -46,39 +54,47 @@ class Login extends Component {
             return <Redirect to='/' />
         }
         return(
-            <section className="LoginPage">
-                <h2>Log In</h2>
-
-                <form onSubmit={event => this.handleSubmit(event)}>
-                    <label> Email:  </label>
-                    <input 
+            <Grid centered columns={2}>
+                <Grid.Column>
+                <Header as="h2" textAlign="center">
+                    Login
+                </Header>
+                <Segment>
+                    <Form size="large" onSubmit={event => this.handleSubmit(event)}>
+                    <Form.Input
                         value={this.state.email}
                         onChange={event => this.genericSync(event)}
-                        type="email" 
                         name="email" 
-                        placeholder="" 
+                        fluid
+                        icon="user"
+                        iconPosition="left"
+                        placeholder="Email address"
                     />
-         
-
-                    <label> Password: </label>
-                    <input 
+                    <Form.Input
                         value={this.state.originalPassword}
                         onChange={event => this.genericSync(event)}
-                        type="password" 
                         name="originalPassword" 
-                        placeholder="********"
+                        fluid
+                        icon="lock"
+                        iconPosition="left"
+                        placeholder="Password"
+                        type="password"
                     />
-                    <button>Log In</button>
-                </form>
-                <p>Don't have account? 
-                    <NavLink to={"/signup"}> Signup</NavLink>
-                </p>
-                { this.state.message && <div> { this.state.message } </div> }
-            </section>
+
+                    <Button color="blue" fluid size="large">
+                        Login
+                    </Button>
+                    </Form>
+                </Segment>
+                <Message>
+                    Not registered yet? <NavLink to={"/signup-page"}> Signup</NavLink>
+                </Message >
+                    { this.state.message && <Message>{ this.state.message } </Message >}
+                </Grid.Column>
+            </Grid>
+            
         );
     }
-
-
 
 
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import '../styles/index.css';
+import '../index.css';
 import ParkHeader from '../styles/img/MountRushmore.jpg';
 
 class Home extends Component {

@@ -1,7 +1,8 @@
 import React from "react";
 import { Container, Image, Menu } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
 
-const Navbar = () => (
+const HeaderSection = () => (
   <div className="header">
     <Menu>
       <Container>
@@ -14,11 +15,11 @@ const Navbar = () => (
 
         <Menu.Menu position="right">
           <Menu.Item as="a" name="login">
-            Login
+            <NavLink to="/login-page" variant="h6" color="white"> Login </NavLink>
           </Menu.Item>
 
           <Menu.Item as="a" name="register">
-            Register
+            <NavLink to="/signup-page" variant="h6" color="white"> Register </NavLink>
           </Menu.Item>
         </Menu.Menu>
       </Container>
@@ -26,4 +27,4 @@ const Navbar = () => (
   </div>
 );
 
-export default Navbar;
+export default HeaderSection;
