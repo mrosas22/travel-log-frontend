@@ -28,9 +28,9 @@ class Signup extends Component{
     handleSubmit(event){
         event.preventDefault();
         axios.post(
-            'http://localhost:3001/api/signup', //1st which route I am hitting in the backend
-            this.state, //2nd, since this is a post route, I have to send something
-            {withCredentials:true}//3rd and optional===> credentials:true ???
+            `${process.env.REACT_APP_API_URL}/signup`, 
+            this.state, 
+            {withCredentials:true}
         )
         .then(responseFromServer =>{
             console.log('response is: ', responseFromServer)

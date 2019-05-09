@@ -23,9 +23,8 @@ class ParkList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/api/parks')
+    axios.get(`${process.env.REACT_APP_API_URL}/parks`)
         .then( responseFromAPI => {
-            console.log('The response from the server is: ',responseFromAPI )
             this.setState({ parksArray: responseFromAPI.data }) })
   }
 

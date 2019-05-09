@@ -26,7 +26,7 @@ class AuthMenu extends Component {
     logout(){
         // console.log('Logging out user: ', this.state.currentUser)
         axios.delete(
-          "http://localhost:3001/api/logout",
+            `${process.env.REACT_APP_API_URL}/parks/logout`,
           {withCredentials:true}
         )
         .then(()=> this.syncCurrentUser(null))

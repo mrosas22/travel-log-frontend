@@ -27,7 +27,7 @@ class ParkAdd extends Component {
             uploadData.append("submittedFile", files[0]);
 
             axios.post(
-                "http://localhost:3001/api/upload/file",
+                `${process.env.REACT_APP_API_URL}/upload/file`,
                 uploadData,
                 { withCredentials: true }
             )
@@ -43,7 +43,7 @@ class ParkAdd extends Component {
             event.preventDefault();
 
             axios.post(
-                "http://localhost:3001/api/parks",
+                `${process.env.REACT_APP_API_URL}/parks`,
                 this.state,
                 { withCredentials: true }
             )

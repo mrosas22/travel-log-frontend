@@ -25,7 +25,7 @@ class ParkDetails extends Component {
         // console.log(' = == = = =', this.props.match.params);
         const { params } = this.props.match;
 
-        axios.get(`http://localhost:3001/api/parks/${params.id}`)
+        axios.get(`${process.env.REACT_APP_API_URL}/parks/${params.id}`)
         .then(responseFromApi => {
             // console.log('this is res: ', responseFromApi);
             this.setState(responseFromApi.data.park);
@@ -38,7 +38,7 @@ class ParkDetails extends Component {
     }
 
     handleDelete(id){
-        axios.delete(`http://localhost:3001/api/parks/${id}`)
+        axios.delete(`${process.env.REACT_APP_API_URL}/parks/${id}`)
         .then(responseFromApi => {
             this.props.history.push('/park-list'); 
         })

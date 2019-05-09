@@ -42,7 +42,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    axios.get("http://localhost:3001/api/checkuser", { withCredentials:true })
+    axios.get(`${process.env.REACT_APP_API_URL}/checkuser`, { withCredentials:true })
     .then(responseFromBackend => {
       // console.log("Check User in APP.JS: ",responseFromBackend.data)
       const { userDoc } = responseFromBackend.data;
@@ -55,7 +55,7 @@ class App extends Component {
   }
   logout(){
     axios.delete(
-      "http://localhost:3001/api/logout",
+      `${process.env.REACT_APP_API_URL}/logout`,
       {withCredentials:true}
     )
     .then(()=> this.syncCurrentUser(null))
@@ -106,8 +106,12 @@ class App extends Component {
                   onUserChange={userDoc => this.syncCurrentUser(userDoc)} />
                 } />
               <Route path="/park-list" location={location} component={ParkList} />
+              <Route path="/add-park" render={() => <ParkAdd currentUser={this.state.currentUser}/>}/>
+              <Route path="/park-list" component={ParkList}/>
+              <Route path="/park-details/:id" component={ParkDetails} />
               <Route path="/activities" location={location} component={Activities} />
               <Route path="/community" location={location} component={Community} />
+              <Route component={NotFound} /> 
             </Switch>
           </NavigationDrawer>
         )}
