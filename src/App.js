@@ -14,24 +14,7 @@ import Community from './components/Community';
 import NotFound from './components/NotFound';
 //Style Components
 import Navbar from './components/Navbar'
-import Sidebar from './components/Sidebar';
-import { NavigationDrawer } from 'react-md';
-import HeaderSection from './components/HeaderSection';
 
-const navItems = [{
-  exact: true,
-  label: 'Home',
-  to: '/',
-}, {
-  label: 'Parks',
-  to: '/park-list',
-},{
-  label: 'Activities',
-  to: '/activities',
-}, {
-  label: 'Community',
-  to: '/community',
-}];
 
 class App extends Component {
   constructor(){
@@ -42,7 +25,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    axios.get(`${process.env.REACT_APP_API_URL}/checkuser`, { withCredentials:true })
+    axios.get(`${process.env.REACT_APP_API_URL}/api/checkuser`, { withCredentials:true })
     .then(responseFromBackend => {
       // console.log("Check User in APP.JS: ",responseFromBackend.data)
       const { userDoc } = responseFromBackend.data;
@@ -55,67 +38,38 @@ class App extends Component {
   }
   logout(){
     axios.delete(
-      `${process.env.REACT_APP_API_URL}/logout`,
+      `${process.env.REACT_APP_API_URL}/api/logout`,
       {withCredentials:true}
     )
     .then(()=> this.syncCurrentUser(null))
     .catch(err => console.log(err))
   }
 
-
   render() {
     return (
       <div className="App">
-        <Navbar currentUser={this.state.currentUser} logoutUser={this.state.currentUser} />
-        <HeaderSection/>
         <header>
-         <nav>
-            <NavLink to="/"> Home </NavLink>
-            <NavLink to='/park-list'>Parks</NavLink>
-            {this.state.currentUser ? (
-              <span>
-                <NavLink to='/add-park'>Add Park</NavLink>
-                <br/>
-                <b> {this.state.currentUser.fullName}</b>
-                <button onClick={() => this.logout()}>Log Out</button>
-              </span>
-              ):(
-                <span>
-                  <NavLink to="/signup-page"> Signup </NavLink>
-                  <NavLink to="/login-page"> Login </NavLink>  
-                </span>
-            )}
-
-         </nav>
+          <Navbar currentUser={this.state.currentUser} onUserChange={userDoc => this.syncCurrentUser(userDoc)} />
         </header>
-        <Route
-        render={({ location }) => (
-          <NavigationDrawer
-            drawerTitle="U.S. National Parks"
-            toolbarTitle="Community Travel Guide"
-            navItems={navItems.map(props => <Sidebar {...props} key={props.to} />)}
-          >
-            <Switch key={location.key}>
-              <Route exact path="/" location={location} component={Home} />
-              <Route path="/signup-page" location={location} render={ () => 
+
+            <Switch >
+              <Route exact path="/" component={Home} />
+              <Route path="/signup-page" render={ () => 
                 <Signup currentUser={ this.state.currentUser } 
                   onUserChange={userDoc => this.syncCurrentUser(userDoc)} />
                 } />
-              <Route path="/login-page" location={location} render={ () => 
+              <Route path="/login-page" render={ () => 
                 <Login currentUser={ this.state.currentUser } 
                   onUserChange={userDoc => this.syncCurrentUser(userDoc)} />
                 } />
-              <Route path="/park-list" location={location} component={ParkList} />
+              <Route path="/park-list" component={ParkList} />
               <Route path="/add-park" render={() => <ParkAdd currentUser={this.state.currentUser}/>}/>
               <Route path="/park-list" component={ParkList}/>
               <Route path="/park-details/:id" component={ParkDetails} />
-              <Route path="/activities" location={location} component={Activities} />
-              <Route path="/community" location={location} component={Community} />
+              <Route path="/activities" component={Activities} />
+              <Route path="/community" component={Community} />
               <Route component={NotFound} /> 
             </Switch>
-          </NavigationDrawer>
-        )}
-      />
         
 
         <footer>
