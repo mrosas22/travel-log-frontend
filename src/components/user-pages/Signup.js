@@ -28,7 +28,7 @@ class Signup extends Component{
     handleSubmit(event){
         event.preventDefault();
         axios.post(
-            `${process.env.REACT_APP_API_URL}/signup`, 
+            `${process.env.REACT_APP_API_URL}/api/signup`, 
             this.state, 
             {withCredentials:true}
         )

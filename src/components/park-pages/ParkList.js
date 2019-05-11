@@ -23,7 +23,7 @@ class ParkList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`${process.env.REACT_APP_API_URL}/parks`)
+    axios.get(`${process.env.REACT_APP_API_URL}/api/parks`)
         .then( responseFromAPI => {
             this.setState({ parksArray: responseFromAPI.data }) })
   }
@@ -38,9 +38,9 @@ class ParkList extends React.Component {
         </h2>
   
         <div className="md-grid">
-            {parksArray.map((park) => {
+            {parksArray && parksArray.length && parksArray.map((park, index) => {
               return (
-                <Card className="cards__example md-cell md-cell--6 md-cell--8-tablet">
+                <Card className="cards__example md-cell md-cell--6 md-cell--8-tablet" key={index}>
                   <Media>
                     <img src={park.imagePark} alt="" />
                     <MediaOverlay>

@@ -26,7 +26,7 @@ class ParkEdit extends Component {
         event.preventDefault();
 
         axios.put(
-          `${process.env.REACT_APP_API_URL}/parks/${this.props.thePark._id}`,
+            `${process.env.REACT_APP_API_URL}/api/parks/${this.props.thePark._id}`,
           this.state,
           { withCredentials: true } // FORCE axios to send cookies across domains
         )
