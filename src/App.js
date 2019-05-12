@@ -11,9 +11,11 @@ import ParkList from './components/park-pages/ParkList';
 import ParkDetails from './components/park-pages/ParkDetails';
 import Activities from './components/Activities';
 import Community from './components/Community';
+import UserProfile  from './components/profile-pages/UserProfile'
 import NotFound from './components/NotFound';
 //Style Components
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 
 class App extends Component {
@@ -68,13 +70,12 @@ class App extends Component {
               <Route path="/park-details/:id" component={ParkDetails} />
               <Route path="/activities" component={Activities} />
               <Route path="/community" component={Community} />
+              <Route path="/profile/:id" component={UserProfile }/>
               <Route component={NotFound} /> 
             </Switch>
         
 
-        <footer>
-          Made with React
-        </footer>
+          <Footer />
       </div>
     );
   }

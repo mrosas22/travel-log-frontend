@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import ParkAdd from './ParkAdd';
 //Styling Components from MD
 import {
@@ -34,7 +34,7 @@ class ParkList extends React.Component {
     return (
       <div className="md-grid md-text-container">
         <h2 className="md-cell md-cell--12">
-          Parks
+          <NavLink className="nav-link" to="/add-park"> Parks </NavLink>
         </h2>
   
         <div className="md-grid">
@@ -42,15 +42,15 @@ class ParkList extends React.Component {
               return (
                 <Card className="cards__example md-cell md-cell--6 md-cell--8-tablet" key={index}>
                   <Media>
-                    <img src={park.imagePark} alt="" />
+                    <img src={park.imagePark} alt={park.name} />
                     <MediaOverlay>
                       <CardTitle title={park.name} >
-                        <Button className="md-cell--right" icon></Button>
                       </CardTitle>
                     </MediaOverlay>
                   </Media>
                   <CardText>
                       <p>{park.description}</p>
+                      <NavLink className="md-cell--right"  to={`/park-details/${park._id}`}> Read&nbsp;More&nbsp;»</NavLink>
                     </CardText>
                 </Card>
               )

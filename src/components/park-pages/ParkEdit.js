@@ -44,38 +44,37 @@ class ParkEdit extends Component {
         const { name, description, imagePark} = this.state;
         return (
             <section>
-                <h2>Edit { name }</h2>
+                <h2>{ name }</h2>
 
-                <form onSubmit={event => this.handleSubmit(event)}>
-                    <label> Name: </label>
-                    <input 
-                        value={ name }
-                        onChange={event => this.genericSync(event)}
-                        type="text" 
-                        name="name" 
-                    />
+                <form class="was-validated" onSubmit={ e => this.handleSubmit(e) } >
+                        <div className="form-group">
+                            <label htmlFor="exampleFormControlInput1">Name</label>
+                            <input name = "name" type = "text" className="form-control" placeholder="" 
+                            value = { name }
+                            onChange={ e => this.genericSync(e) }
+                            />
+                        </div>
 
-                    <label> Description: </label>
-                    <input 
-                        value={ description }
-                        onChange={event => this.genericSync(event)}
-                        type="text" 
-                        name="description" 
-                    />
+                        <div className="mb-3">
+                            <label htmlFor="validationTextarea">Description</label>
+                            <textarea name = "description" type = "text" className="form-control is-invalid" id="validationTextarea" placeholder = "" 
+                            value = { description }
+                            onChange={ e => this.genericSync(e) }
+                            />
+                            <div className="invalid-feedback">
+                            
+                            </div>
+                        </div>
+                            <div className="custom-file">
+                            <input type="file" className="custom-file-input" id="validatedCustomFile" 
+                            onChange={ e => this.uploadImage(e) }
+                            />
+                            <label className="custom-file-label" htmlFor="validatedCustomFile">Choose file...</label>
+                        </div>
+                        <img src={ imagePark } width="200"/><br/>
+                        <button> Save </button>
 
-                    {/* <label> Image: </label>
-                    <input
-                        onChange={ event => this.uploadImage(event) }
-                        type="file"   
-                    />
-                    <br /> */}
-                    <img src={ imagePark } width="200"/>
-
-                    <br />
-            
-                    <button> Save </button>
-                    
-                </form> 
+                   </form>
 
             </section>
         )

@@ -2,15 +2,22 @@ import React, { Component } from "react";
 import {Redirect} from 'react-router-dom'
 import axios from "axios";
 
-class ParkAdd extends Component {
+class ProfileAdd extends Component {
        constructor(props){
            super(props);
            this.state = {
-               name: "",
-               description: "",
-               imagePark: "",
+               skills: "",
+               bio: "",
+               avatar: "",
                isSubmitSuccessful: false,
            };
+       }
+       componentWillReceiveProps(nextProps){
+            if(nextProps.errors){
+                this.setState({
+                errors: nextProps.errors
+                });
+            }
        } 
 
        // for all fields except images and specs
@@ -31,24 +38,23 @@ class ParkAdd extends Component {
                 uploadData,
                 { withCredentials: true }
             )
-            .then( response  => this.setState({ imagePark:response.data.fileUrl }))
+            .then( response  => this.setState({ avatar:response.data.fileUrl }))
             .then( response => {
                 console.log('The response from the server is: ',response )
                 this.setState({ imagePark: response.data }) })
             .catch( err => console.log(err) );
         }
 
-
         handleSubmit(event){
-            event.preventDefault();
-
+            event.preventDefault(); 
             axios.post(
-                `${process.env.REACT_APP_API_URL}/api/parks`,
+                //POST /api/profile
+                `${process.env.REACT_APP_API_URL}/api/profile`,
                 this.state,
                 { withCredentials: true }
             )
             .then( response => {
-                console.log("new park: ", response.data);
+                console.log("new profile: ", response.data);
                 this.setState({ isSubmitSuccessful: true })
             } )
             .catch( err => console.log(err) );
@@ -56,33 +62,39 @@ class ParkAdd extends Component {
 
 
        render(){
-            const { name, description, imagePark} = this.state;
-            if(!this.props.currentUser){
-                return <Redirect to='login-page'/>
-            }
+            const { skills, bio, avatar} = this.state;
+            // if(!this.props.currentUser){
+            //     return <Redirect to='login-page'/>
+            // }
            if(this.state.isSubmitSuccessful){
-               return <Redirect to='/park-list'/>
+               return <Redirect to='/profile'/>
            }
            return(
                <section>
-                   <h2> Add a Park </h2>
+                   <h2> Add Profile </h2>
                    <form class="was-validated" onSubmit={ e => this.handleSubmit(e) } >
                         <div className="form-group">
-                            <label htmlFor="exampleFormControlInput1">Name</label>
-                            <input name = "name" type = "text" className="form-control" placeholder="" 
-                            value = { name }
-                            onChange={ e => this.genericSync(e) }
-                            />
+                            <label htmlFor="exampleFormControlSelect2">Select your skills</label>
+                            <select name = "skills" multiple className="form-control" id="exampleFormControlSelect2"
+                                value = { skills }
+                                onChange={ e => this.genericSync(e) }
+                            >
+                                <option>JavaScript</option>
+                                <option>React</option>
+                                <option>Node</option>
+                                <option>Express</option>
+                                <option>MongoDB</option>
+                            </select>
                         </div>
 
                         <div className="mb-3">
-                            <label htmlFor="validationTextarea">Description</label>
-                            <textarea name = "description" type = "text" className="form-control is-invalid" id="validationTextarea" placeholder = "" 
-                            value = { description }
+                            <label htmlFor="validationTextarea">Bio</label>
+                            <textarea name = "bio" type = "text" className="form-control is-invalid" id="validationTextarea" placeholder = "" 
+                            value = { bio }
                             onChange={ e => this.genericSync(e) }
                             />
                             <div className="invalid-feedback">
-                                Please insert an image.
+                                Please Add image to your profile.
                             </div>
                         </div>
                             <div className="custom-file">
@@ -91,7 +103,7 @@ class ParkAdd extends Component {
                             />
                             <label className="custom-file-label" htmlFor="validatedCustomFile">Choose file...</label>
                         </div>
-                        <img src={ imagePark } width="200"/><br/>
+                        <img src={ avatar } width="200"/><br/>
                         <button> Save </button>
 
                    </form>
@@ -102,4 +114,4 @@ class ParkAdd extends Component {
 }
 
 
-export default ParkAdd;
+export default ProfileAdd;

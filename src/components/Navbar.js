@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { Switch, NavLink, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 class Navbar extends Component {
   logout(){
@@ -33,7 +33,8 @@ class Navbar extends Component {
           <ul className="navbar-nav mr-right">
             {this.props.currentUser ? (
               <li className="nav-item dropdown">
-                    <button onClick={() => this.logout()}>Log Out</button>
+                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit"
+                    onClick={() => this.logout()} >Log Out</button>
               </li>
             ):(
               <li className="nav-item">
@@ -41,9 +42,16 @@ class Navbar extends Component {
               </li>
             
             )}
-            <li className="nav-item">
-              <NavLink to="/signup-page" className="nav-link" > Register </NavLink>
-            </li>
+            {this.props.currentUser ? (
+              <li className="nav-item">
+                <NavLink className="nav-link" to={`/profile/${this.props.currentUser._id}`} > Profile </NavLink>
+              </li>
+            ):(
+              <li className="nav-item">
+                <NavLink to="/signup-page" className="nav-link" > Register </NavLink>
+              </li>
+            
+            )}
           </ul>
           <form className="form-inline my-2 my-lg-0">
             <input className="form-control mr-sm-2" type="text" placeholder="Search..." aria-label="Search" />

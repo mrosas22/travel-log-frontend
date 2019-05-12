@@ -59,7 +59,7 @@ class ParkDetails extends Component {
                                 alt={name}
                                 // className={imagePark}
                                 height="400"
-                                img src={ imagePark } width='100'
+                                img src={ imagePark } width='80'
                                 title= {name}
                             />
                             <CardContent>
@@ -83,8 +83,6 @@ class ParkDetails extends Component {
                     </Card>
                     
                 ) }
-              
-                <Link to={"/park-list"}>Go to parks page </Link>
             </section>
         )
     }

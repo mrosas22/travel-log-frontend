@@ -34,38 +34,41 @@ class Home extends React.Component {
           <Carousel.Item>
             <img
               className="img-slider"
-              src={ParkHeader}
-              alt="First slide"
+              src="https://img.sunset02.com/sites/default/files/styles/4_3_horizontal_inbody_900x506/public/image/2016/09/main/lower-yellowstone-falls.jpg"
+              alt="Yellowstone"
             />
             <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0 btn-btn-success">Plan Your Visit</button>
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0 btn-btn-success">Learn and Explore</button>
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0 btn-btn-success">Get Involved</button>
+              
+
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="img-slider"
-              src={ParkHeader}
-              alt="Third slide"
+              src="https://www.sunset.com/wp-content/uploads/yosemite-wildfire-closures-getty-0918-900x500.jpg"
+              alt="Yosemite"
             />
   
             <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0 btn-btn-success">Plan Your Visit</button>
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0 btn-btn-success">Learn and Explore</button>
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0 btn-btn-success">Get Involved</button>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="img-slider"
-              src={ParkHeader}
-              alt="Third slide"
+              src="https://img.sunset02.com/sites/default/files/styles/4_3_horizontal_inbody_900x506/public/image/2016/06/main/mountain-lake.jpg"
+              alt="Glaciard"
             />
   
             <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0 btn-btn-success">Plan Your Visit</button>
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0 btn-btn-success">Learn and Explore</button>
+            <button type="button" class="btn btn-outline-success my-2 my-sm-0 btn-btn-success">Get Involved</button>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
@@ -74,5 +77,4 @@ class Home extends React.Component {
   }
   
   export default Home;
-
 
